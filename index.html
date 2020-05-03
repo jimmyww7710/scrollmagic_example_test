@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test scrollMagic</title>
+    <script type="text/javascript" src="plugin/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+</head>
+<body>
+    <script>
+        // init controller
+        var controller = new ScrollMagic.Controller();
+    </script>
+    <style type="text/css">
+        .digit {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            -webkit-transform: translateX(-40px);
+                 -moz-transform: translateX(-40px);
+                    -ms-transform: translateX(-40px);
+                     -o-transform: translateX(-40px);
+                            transform: translateX(-40px);
+            -webkit-transition: all 0.6s ease-out;
+                 -moz-transition: all 0.6s ease-out;
+                    -ms-transition: all 0.6s ease-out;
+                     -o-transition: all 0.6s ease-out;
+                            transition: all 0.6s ease-out;
+        }
+        .digit.visible {
+            opacity: 1;
+            -webkit-transform: none;
+                 -moz-transform: none;
+                    -ms-transform: none;
+                     -o-transform: none;
+                            transform: none;
+        }
+        .digit-trigger:nth-child(2) {
+            margin-top: 150px;
+        }
+        .digit-trigger:nth-child(3) {
+            margin-top: 150px;
+        }
+        .digit-trigger:nth-child(4) {
+            margin-top: 150px;
+        }
+        .digit-trigger:nth-child(5) {
+            margin-top: 150px;
+        }
+
+
+        /* style */
+
+        .demo-area {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+   <div style="height: 800px;width:100%; background-color: grey;"></div>
+    <div>
+        <section style="position: fixed;right: 0px; top: 0px;">
+            <div class="demo-area">
+                <div class="digit" style="background-color: tomato;"></div>
+                <div class="digit" style="background-color: green;"></div>
+                <div class="digit" style="background-color: blue;"></div>
+                <div class="digit" style="background-color: yellow;"></div>
+                <div class="digit" style="background-color: purple;"></div>
+            </div>
+        </section>
+        <p>Multiple elements can be looped over and animated as they enter the viewport.</p>
+        <a href="#" class="viewsource">view source</a>
+    </div>
+   
+    <div>
+        <div class="digit-trigger"><p>1</p></div>
+        <div class="digit-trigger"><p>2</p></div>
+        <div class="digit-trigger"><p>3</p></div>
+        <div class="digit-trigger"><p>4</p></div>
+        <div class="digit-trigger"><p>5</p></div>
+    </div>
+
+   
+    
+
+
+    <div style="height: 800px;width:100%; background-color: grey;"></div>
+    <script>
+            // build scenes
+            var revealElements = document.getElementsByClassName("digit");
+            var triggerElements = document.getElementsByClassName("digit-trigger");
+            for (var i=0; i<revealElements.length; i++) { // create a scene for each element
+                new ScrollMagic.Scene({
+                                    triggerElement: triggerElements[i], // y value not modified, so we can use element as trigger as well
+                                    offset: 50,												 // start a little later
+                                    triggerHook: 0.9,
+                                })
+                                .setClassToggle(revealElements[i], "visible") // add class toggle
+                                .addIndicators({name: "digit " + (i+1) }) // add indicators (requires plugin)
+                                .addTo(controller);
+            }
+    </script>
+</body>
+</html>
